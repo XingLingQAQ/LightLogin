@@ -182,9 +182,7 @@ public final class RegisterCommand extends LightLoginCommand {
                             ).whenCompleteAsync((addedRow, throwable2) -> {
 
                                 if (addedRow == null || throwable2 != null) {
-                                    if (player.isOnline()) {
-                                        sendColorPrefixMessages(player, super.configuration.getRegisterError(), super.plugin);
-                                    }
+                                    sendColorPrefixMessages(player, super.configuration.getRegisterError(), super.plugin);
                                     if (addedRow == null) {
                                         this.plugin.getLogger().warning("WARNING! Error registering player: " + player.getName());
                                     }
