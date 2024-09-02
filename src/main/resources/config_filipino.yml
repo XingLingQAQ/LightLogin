@@ -43,6 +43,23 @@ login:
     - "/help"
     - "/login"
     - "/register"
+    - '/verify'
+
+captcha:
+  enabled: true
+  message:
+    - "{PREFIX}: &cKailangan ang CAPTCHA na beripikasyon!"
+    - "&cPakisagutan ang tanong sa ibaba upang magrehistro gamit ang /verify <sagot>"
+    - "&eAno ang resulta ng &f&o{MATH_FORMULA}?"
+  max-attempts: 2
+  punishments:
+    - "ban {PLAYER} &cNabigo kang sagutan ang CAPTCHA nang maraming beses!"
+  wrong-answer:
+    - "{PREFIX}: &cMali ang iyong sagot!"
+  correct-answer:
+    - "{PREFIX}: &aTama ang iyong sagot, maaari ka nang magrehistro!"
+  register-not-allowed:
+    - "{PREFIX}: &cHindi ka pinapayagang magrehistro nang hindi natatapos ang CAPTCHA!"
 
 safety:
   players-same-ip: 2      # Ilang players ang maaring mag-connect sabay-sabay gamit ang parehong IPv4?

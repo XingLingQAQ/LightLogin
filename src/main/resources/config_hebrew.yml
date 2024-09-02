@@ -41,7 +41,25 @@ login:
   allowed-commands:       # רשימת פקודות ששחקנים יכולים להריץ לפני שהם מתחברים
     - '/help'
     - '/login'
+    - '/verify'
     - '/register'
+
+captcha:
+  enabled: true
+  message:
+    - "{PREFIX}: &cנדרשת אימות CAPTCHA!"
+    - "&cאנא ענה על השאלה למטה כדי להירשם באמצעות /verify <תשובה>"
+    - "&eמהי התוצאה של &f&o{MATH_FORMULA}?"
+  max-attempts: 2
+  punishments:
+    - "ban {PLAYER} &cנכשלת במבחן ה-CAPTCHA יותר מדי פעמים!"
+  wrong-answer:
+    - "{PREFIX}: &cתשובתך שגויה!"
+  correct-answer:
+    - "{PREFIX}: &aתשובתך נכונה, כעת תוכל להירשם!"
+  register-not-allowed:
+    - "{PREFIX}: &cאינך רשאי להירשם ללא ביצוע CAPTCHA!"
+
 
 safety:
   players-same-ip: 2      # כמה שחקנים יכולים להתחבר באותו זמן דרך אותו כתובת IPv4?

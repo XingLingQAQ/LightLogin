@@ -42,6 +42,7 @@ login:
   allowed-commands:       # List of commands that players may run before logging in
     - '/login'
     - '/register'
+    - '/verify'
 
 safety:
   players-same-ip: 2      # How many players can be connected at the same time through the same IPv4?
@@ -105,6 +106,22 @@ login-animation:
 temp-password:
   secret-key: "L&UJ6tT%"  # Please change this!
   password-timeout: 180   # After how many seconds this temp-password expires.
+
+captcha:
+  enabled: true
+  message:
+    - "{PREFIX}: &cCAPTCHA verification required!"
+    - "&cPlease answer the question below in order to register using /verify <answer>"
+    - "&eWhat is the result of &f&o{MATH_FORMULA}?"
+  max-attempts: 2
+  punishments:
+    - "ban {PLAYER} &cYou failed your captcha too many times!"
+  wrong-answer:
+    - "{PREFIX}: &cYour answer is incorrect!"
+  correct-answer:
+    - "{PREFIX}: &aYour answer is correct, you can now register!"
+  register-not-allowed:
+    - "{PREFIX}: &cYou are not allowed to register without doing CAPTCHA!"
 
 # Messages configuration
 messages:

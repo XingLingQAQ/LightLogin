@@ -463,4 +463,33 @@ public final class LightConfiguration {
     public List<String> getLoginDataDisplay() {
         return this.configuration.getStringList("messages.login-data-display");
     }
+
+    public boolean getCaptchaEnabled() {
+        return this.configuration.getBoolean("captcha.enabled", true);
+    }
+
+    public List<String> getCaptchaMessage() {
+        return this.configuration.getStringList("captcha.message");
+    }
+
+    public List<String> getCaptchaWrongAnswer() {
+        return this.configuration.getStringList("captcha.wrong-answer");
+    }
+
+    public List<String> getCaptchaCorrectAnswer() {
+        return this.configuration.getStringList("captcha.correct-answer");
+    }
+
+    public List<String> getCaptchaRegisterNotAllowed() {
+        return this.configuration.getStringList("captcha.register-not-allowed");
+    }
+
+    public int getCaptchaMaxAttempts() {
+        return this.configuration.getInt("captcha.max-attempts");
+    }
+
+    public List<String> getCaptchaPunishments() {
+        return this.configuration.getStringList("captcha.punishments");
+    }
+
 }

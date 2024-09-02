@@ -60,7 +60,9 @@ public class StartupLogo {
             "WARNING! Invalid database type from config file. Cannot load plugin.",
             "Shutting down server . . .",
             "&7[ &a&l✔&r &7] &aCorrectly set up Authentication Database &7(&a",
-            "&7)&e!"
+            "&7)&e!",
+            "&7[ &a&l. . .&r &7] &eSetting up CAPTCHA",
+            "&7[ &a&l✔&r &7] &aCorrectly set up CAPTCHA features!",
     };
 
     public static String getLoadingString(int number) {

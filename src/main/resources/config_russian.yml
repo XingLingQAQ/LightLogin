@@ -43,6 +43,24 @@ login:
     - '/help'
     - '/login'
     - '/register'
+    - '/verify'
+
+captcha:
+  enabled: true
+  message:
+    - "{PREFIX}: &cТребуется проверка CAPTCHA!"
+    - "&cПожалуйста, ответьте на вопрос ниже, чтобы зарегистрироваться с помощью /verify <ответ>"
+    - "&eКакой результат &f&o{MATH_FORMULA}?"
+  max-attempts: 2
+  punishments:
+    - "ban {PLAYER} &cВы слишком много раз не прошли CAPTCHA!"
+  wrong-answer:
+    - "{PREFIX}: &cВаш ответ неверен!"
+  correct-answer:
+    - "{PREFIX}: &aВаш ответ правильный, теперь вы можете зарегистрироваться!"
+  register-not-allowed:
+    - "{PREFIX}: &cВы не можете зарегистрироваться без прохождения CAPTCHA!"
+
 
 safety:
   players-same-ip: 2      # Сколько игроков может быть подключено одновременно через один и тот же IPv4?

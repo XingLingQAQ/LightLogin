@@ -37,3 +37,6 @@ commands:
   login-data:
     aliases: ['logindata', 'userdata']
     description: "Read login data from users."
+  verify:
+    aliases: []
+    description: "Used to verify during CAPTCHA."

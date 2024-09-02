@@ -26,6 +26,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import top.cmarco.lightlogin.command.CommandManager;
 import top.cmarco.lightlogin.command.LightLoginCommand;
 import top.cmarco.lightlogin.command.temppassword.TempPasswordManager;
+import top.cmarco.lightlogin.command.verify.VerificationManager;
 import top.cmarco.lightlogin.configuration.ConfigUtils;
 import top.cmarco.lightlogin.configuration.ConfigurationFiles;
 import top.cmarco.lightlogin.configuration.LightConfiguration;
@@ -63,6 +64,7 @@ public final class LightLoginPlugin extends JavaPlugin {
     private LibraryManager libraryManager = null;
     private CommandManager commandManager = null;
     private ListenerManager listenerManager = null;
+    private VerificationManager verificationManager = null;
 
     /* --------------------------------------------------------- */
 
@@ -80,6 +82,7 @@ public final class LightLoginPlugin extends JavaPlugin {
         this.setupDatabase();
         this.loadLoginWorld(); // 1
         this.setVoidLoginManager(); // 2
+        this.setupVerificationManager();
         this.setupAuthenticationManager();
         this.setupPasswordManager();
         this.setupTempPswManager();
@@ -156,6 +159,12 @@ public final class LightLoginPlugin extends JavaPlugin {
         this.sendConsoleColoured(StartupLogo.getLoadingString(3));
         this.voidLoginManager = new VoidLoginManager(this.loginWorld);
         this.sendConsoleColoured(StartupLogo.getLoadingString(4));
+    }
+
+    public void setupVerificationManager() {
+        this.sendConsoleColoured(StartupLogo.getLoadingString(27));
+        this.verificationManager = new VerificationManager(this);
+        this.sendConsoleColoured(StartupLogo.getLoadingString(28));
     }
 
     private void setAuthLogs() {
@@ -327,5 +336,9 @@ public final class LightLoginPlugin extends JavaPlugin {
 
     public TempPasswordManager getTempPasswordManager() {
         return tempPasswordManager;
+    }
+
+    public VerificationManager getVerificationManager() {
+        return verificationManager;
     }
 }

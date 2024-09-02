@@ -47,6 +47,7 @@ login:
     - '/help'
     - '/login'
     - '/register'
+    - '/verify'
 
 # 安全密码配置
 safe-passwords:
@@ -57,6 +58,22 @@ safe-passwords:
     min-numbers: 2        # 数字字符的最小数量
     min-special: 1        # 特殊字符的最小数量
     allowed-special: ['@', '^', '-', '_', '#', '!', '?', '*', '$', '%', '&', '*'] # 允许的特殊字符
+
+captcha:
+  enabled: true
+  message:
+    - "{PREFIX}: &c需要进行CAPTCHA验证！"
+    - "&c请回答以下问题以使用 /verify <答案> 注册"
+    - "&e请计算 &f&o{MATH_FORMULA} 的结果是什么？"
+  max-attempts: 2
+  punishments:
+    - "ban {PLAYER} &c你多次未通过验证码！"
+  wrong-answer:
+    - "{PREFIX}: &c你的答案不正确！"
+  correct-answer:
+    - "{PREFIX}: &a你的答案正确，你现在可以注册了！"
+  register-not-allowed:
+    - "{PREFIX}: &c未完成CAPTCHA验证不允许注册！"
 
 # 电子邮件配置
 email:

@@ -27,6 +27,7 @@ import top.cmarco.lightlogin.api.PlayerAuthenticateEvent;
 import top.cmarco.lightlogin.api.PlayerRegisterEvent;
 import top.cmarco.lightlogin.command.LightLoginCommand;
 import top.cmarco.lightlogin.command.utils.CommandUtils;
+import top.cmarco.lightlogin.command.verify.VerificationManager;
 import top.cmarco.lightlogin.data.LightLoginDbRow;
 import top.cmarco.lightlogin.database.PluginDatabase;
 import top.cmarco.lightlogin.encrypt.Argon2Utilities;
@@ -49,6 +50,13 @@ public final class RegisterCommand extends LightLoginCommand {
 
         if (args.length != 2) {
             sendColorPrefixMessages(player, super.configuration.getRegisterIncorrectUsageMessage(), super.plugin);
+            return;
+        }
+
+        final VerificationManager verificationManager = plugin.getVerificationManager();
+
+        if (verificationManager.isCaptchaActive() && verificationManager.getData(player) != null) {
+            sendColorPrefixMessages(player, super.configuration.getCaptchaRegisterNotAllowed(), super.plugin);
             return;
         }
 

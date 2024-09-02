@@ -25,11 +25,14 @@ import top.cmarco.lightlogin.LightLoginPlugin;
 import top.cmarco.lightlogin.api.AuthenticationCause;
 import top.cmarco.lightlogin.api.PlayerAuthenticateEvent;
 import top.cmarco.lightlogin.command.LightLoginCommand;
+import top.cmarco.lightlogin.command.verify.VerificationManager;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.CopyOnWriteArraySet;
+import java.util.stream.Collectors;
 
 public class BasicAuthenticationManager implements AuthenticationManager {
 
@@ -53,11 +56,11 @@ public class BasicAuthenticationManager implements AuthenticationManager {
         }
 
         this.loginMsg = plugin.getServer().getScheduler().runTaskTimer(plugin, () -> {
-            plugin.getServer().getOnlinePlayers().stream()
-                    .filter(p -> unloginnedSet.contains(p.getUniqueId()))
-                    .forEach(p -> LightLoginCommand.sendColorPrefixMessages(p, plugin.getLightConfiguration().getLoginMessages(), plugin));
-            }
-        , 1L, 20L*5L);
+                    plugin.getServer().getOnlinePlayers().stream()
+                            .filter(p -> unloginnedSet.contains(p.getUniqueId()))
+                            .forEach(p -> LightLoginCommand.sendColorPrefixMessages(p, plugin.getLightConfiguration().getLoginMessages(), plugin));
+                }
+                , 1L, 20L * 5L);
     }
 
     @Override
@@ -67,12 +70,25 @@ public class BasicAuthenticationManager implements AuthenticationManager {
             registerMsg = null;
         }
 
+        final VerificationManager vM = plugin.getVerificationManager();
         this.registerMsg = plugin.getServer().getScheduler().runTaskTimer(plugin, () -> {
                     plugin.getServer().getOnlinePlayers().stream()
                             .filter(p -> unregisteredSet.contains(p.getUniqueId()))
-                            .forEach(p -> LightLoginCommand.sendColorPrefixMessages(p, plugin.getLightConfiguration().getRegisterMessage(), plugin));
+                            .forEach(p -> {
+                                if (vM.isCaptchaActive() && vM.getData(p) != null) {
+                                    List<String> alteredMsgs =
+                                            plugin.getLightConfiguration().getCaptchaMessage()
+                                                    .stream()
+                                                    .map(s -> s.replace("{MATH_FORMULA}", vM.getData(p).getMathFormula()))
+                                                    .toList();
+
+                                    LightLoginCommand.sendColorPrefixMessages(p, alteredMsgs, plugin);
+                                } else {
+                                    LightLoginCommand.sendColorPrefixMessages(p, plugin.getLightConfiguration().getRegisterMessage(), plugin);
+                                }
+                            });
                 }
-                , 1L, 20L*5L);
+                , 1L, 20L * 5L);
     }
 
     @Override

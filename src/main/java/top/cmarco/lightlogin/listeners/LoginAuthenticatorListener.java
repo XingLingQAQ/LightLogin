@@ -30,6 +30,7 @@ import top.cmarco.lightlogin.api.AuthenticationCause;
 import top.cmarco.lightlogin.api.PlayerAuthenticateEvent;
 import top.cmarco.lightlogin.api.PlayerUnauthenticateEvent;
 import top.cmarco.lightlogin.command.LightLoginCommand;
+import top.cmarco.lightlogin.command.verify.VerificationManager;
 import top.cmarco.lightlogin.configuration.LightConfiguration;
 import top.cmarco.lightlogin.data.AuthenticationManager;
 import top.cmarco.lightlogin.data.AutoKickManager;
@@ -64,7 +65,6 @@ public final class LoginAuthenticatorListener extends NamedListener {
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void preJoin(final AsyncPlayerPreLoginEvent event) {
-
         final InetAddress inetAddress = event.getAddress();
         int inetMatchResult = 0x00;
         for (final Player player : this.plugin.getServer().getOnlinePlayers()) {
@@ -77,6 +77,8 @@ public final class LoginAuthenticatorListener extends NamedListener {
         final LightConfiguration lightConfiguration = this.plugin.getLightConfiguration();
 
         if (inetMatchResult < lightConfiguration.getPlayersSameIp()) {
+            VerificationManager verificationManager = plugin.getVerificationManager();
+            verificationManager.addData(event.getUniqueId());
             return;
         }
 

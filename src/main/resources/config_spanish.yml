@@ -41,7 +41,25 @@ login:
   allowed-commands:       # Lista de comandos que los jugadores pueden ejecutar antes de iniciar sesión
     - '/help'
     - '/login'
+    - '/verify'
     - '/register'
+
+captcha:
+  enabled: true
+  message:
+    - "{PREFIX}: &c¡Se requiere verificación CAPTCHA!"
+    - "&cPor favor, responde la pregunta a continuación para registrarte usando /verify <respuesta>"
+    - "&e¿Cuál es el resultado de &f&o{MATH_FORMULA}?"
+  max-attempts: 2
+  punishments:
+    - "ban {PLAYER} &c¡Fallaste la CAPTCHA demasiadas veces!"
+  wrong-answer:
+    - "{PREFIX}: &c¡Tu respuesta es incorrecta!"
+  correct-answer:
+    - "{PREFIX}: &a¡Tu respuesta es correcta, ahora puedes registrarte!"
+  register-not-allowed:
+    - "{PREFIX}: &c¡No se te permite registrarte sin completar el CAPTCHA!"
+
 
 safety:
   players-same-ip: 2      # ¿Cuántos jugadores pueden estar conectados al mismo tiempo desde la misma dirección IPv4?
