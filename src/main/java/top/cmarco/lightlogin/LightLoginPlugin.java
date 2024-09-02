@@ -20,7 +20,6 @@ package top.cmarco.lightlogin;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.core.Logger;
 import org.apache.logging.log4j.core.filter.AbstractFilter;
-import org.bstats.bukkit.Metrics;
 import org.bukkit.World;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -64,7 +63,6 @@ public final class LightLoginPlugin extends JavaPlugin {
     private LibraryManager libraryManager = null;
     private CommandManager commandManager = null;
     private ListenerManager listenerManager = null;
-    private Metrics dataStealer = null;
 
     /* --------------------------------------------------------- */
 
@@ -91,7 +89,6 @@ public final class LightLoginPlugin extends JavaPlugin {
         this.setupCommands();
         this.setupKickManager();
         this.setAuthLogs();
-        this.startMetrics();
     }
 
     /**
@@ -106,23 +103,9 @@ public final class LightLoginPlugin extends JavaPlugin {
         if (this.authLogs != null) {
             this.authLogs.saveLogs();
         }
-
-        this.stopMetrics();
     }
 
     /* --------------------------------------------------------- */
-
-    private void startMetrics() {
-        this.dataStealer = new Metrics(this, METRICS_ID);
-    }
-
-    private void stopMetrics() {
-        if (this.dataStealer == null) {
-            return;
-        }
-
-        this.dataStealer.shutdown();
-    }
 
     private void loadLibraries() {
         this.libraryManager = new LibraryManager(this);

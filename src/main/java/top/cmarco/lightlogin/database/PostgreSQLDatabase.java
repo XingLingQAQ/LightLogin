@@ -43,7 +43,7 @@ public class PostgreSQLDatabase extends HikariPluginDatabase {
             "salt TEXT NOT NULL," +
             "email VARCHAR(64)," +
             "last_login BIGINT NOT NULL," +
-            "last_ipv4 INTEGER NOT NULL" +
+            "last_ipv4 BIGINT NOT NULL" +
             ");";
 
     /**

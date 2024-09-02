@@ -219,4 +219,13 @@ messages:
     - "{PREFIX}: &eNous avons ajouté avec succès un mot de passe temporaire pour le joueur {PLAYER}."
   cannot-register-too-many-ip:
     - "{PREFIX}: &cVous ne pouvez pas vous inscrire car le nombre maximal de comptes par adresse IP a été atteint !"
+  login-data-not-found:
+    - "{PREFIX}: &cAucune donnée de connexion trouvée pour ce joueur."
+  login-data-display:
+    - "{PREFIX}: &eRésultats des données de connexion"
+    - "&7&oPour des raisons de confidentialité, nous ne montrons pas les mots de passe ou les hachages des utilisateurs."
+    - "&7UUID: &f{UUID}"
+    - "&7Email: &f{EMAIL}"
+    - "&7Dernière IP: &f{IP}"
+    - "&7Dernière connexion: &f{LOGIN}"
 

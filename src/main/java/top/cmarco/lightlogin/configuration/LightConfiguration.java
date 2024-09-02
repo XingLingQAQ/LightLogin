@@ -455,4 +455,12 @@ public final class LightConfiguration {
     public List<String> getCannotRegisterTooManyIp() {
         return this.configuration.getStringList("messages.cannot-register-too-many-ip");
     }
+
+    public List<String> getLoginDataNotFound() {
+        return this.configuration.getStringList("messages.login-data-not-found");
+    }
+
+    public List<String> getLoginDataDisplay() {
+        return this.configuration.getStringList("messages.login-data-display");
+    }
 }

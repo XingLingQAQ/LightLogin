@@ -49,8 +49,10 @@ public final class BaseCommand extends LightLoginCommand {
         final String s15 = colorMessage("  ● &7/&eregister &7<&6password&7> &7<&6passwordConfirm&7>");
         final String s16 = colorMessage("&7Assign temp-password through console.");
         final String s17 = colorMessage("  ● &7/&etemppassword &7<&6username&7> &7<&6password&7> &7<&6security-key&7>");
+        final String s18 = colorMessage("&7Read user login data.");
+        final String s19 = colorMessage("  ● &7/&elogin-data &7<&6username&7>");
 
-        final String[] englishMessages = {s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s13,s14,s15,s16,s17};
+        final String[] englishMessages = {s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s13,s14,s15,s16,s17, s18,s19};
         sender.sendMessage(englishMessages);
     }
 

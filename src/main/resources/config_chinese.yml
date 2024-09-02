@@ -218,6 +218,15 @@ messages:
     - "{PREFIX}: &e我们已成功为玩家{PLAYER}添加了临时密码。"
   cannot-register-too-many-ip:
     - "{PREFIX}: &c您无法注册，因为已达到每个 IP 地址的最大帐户数！"
+  login-data-not-found:
+    - "{PREFIX}: &c未找到该玩家的登录数据。"
+  login-data-display:
+    - "{PREFIX}: &e登录数据结果"
+    - "&7&o出于隐私原因，我们不显示用户的密码或哈希值。"
+    - "&7UUID: &f{UUID}"
+    - "&7邮箱: &f{EMAIL}"
+    - "&7最后的IP: &f{IP}"
+    - "&7最后登录: &f{LOGIN}"
 
 
 

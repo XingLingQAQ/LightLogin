@@ -3,7 +3,7 @@ main: "top.cmarco.lightlogin.LightLoginPlugin"
 version: ${project.version}
 load: 'POSTWORLD'
 folia-supported: false
-api-version: "1.13"
+api-version: "1.20"
 author: "CMarco"
 database: false
 description: "Optimised and Safe SpigotMC Software for Authentication"
@@ -34,3 +34,6 @@ commands:
   temppassword:
     aliases: ['temppsw']
     description: "Generate a temporary password via console."
+  login-data:
+    aliases: ['logindata', 'userdata']
+    description: "Read login data from users."

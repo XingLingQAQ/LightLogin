@@ -40,4 +40,17 @@ public final class NetworkUtilities {
 
         return ipv4Value;
     }
+
+    public static String convertLongToInetSocketAddress(final long ipv4Value) {
+        StringBuilder ipAddress = new StringBuilder();
+        for (int i = 3; i >= 0; i--) {
+            long octet = (ipv4Value >> (i * 8)) & 0xFF;
+            ipAddress.append(octet);
+            if (i > 0) {
+                ipAddress.append('.');
+            }
+        }
+        return ipAddress.toString();
+    }
+    
 }

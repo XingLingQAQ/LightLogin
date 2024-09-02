@@ -220,3 +220,13 @@ messages:
     - "{PREFIX}: &eMatagumpay naming idinagdag ang isang pansamantalang password para sa player na {PLAYER}."
   cannot-register-too-many-ip:
     - "{PREFIX}: &cHindi ka makapagrehistro dahil naabot na ang maximum na bilang ng mga account kada IP!"
+  login-data-not-found:
+    - "{PREFIX}: &cWalang nahanap na login data para sa player na ito."
+  login-data-display:
+    - "{PREFIX}: &eMga Resulta ng Login Data"
+    - "&7&oPara sa privacy, hindi namin ipinapakita ang mga password o hash ng mga gumagamit."
+    - "&7UUID: &f{UUID}"
+    - "&7Email: &f{EMAIL}"
+    - "&7Huling IP: &f{IP}"
+    - "&7Huling Pag-login: &f{LOGIN}"
+

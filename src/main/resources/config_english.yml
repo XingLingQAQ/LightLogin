@@ -219,3 +219,12 @@ messages:
     - "{PREFIX}: &eWe successfully added a temporary password for player {PLAYER}."
   cannot-register-too-many-ip:
     - "{PREFIX}: &cYou cannot register as the maximum number of accounts per IP has been reached!"
+  login-data-not-found:
+    - "{PREFIX}: &cNo login data has been found for this player."
+  login-data-display:
+    - "{PREFIX}: &eLogin Data Results"
+    - "&7&oFor privacy reasons, we do not display users passwords or hashes."
+    - "&7UUID: &f{UUID}"
+    - "&7Email: &f{EMAIL}"
+    - "&7Last IP: &f{IP}"
+    - "&7Last Login: &f{LOGIN}"
