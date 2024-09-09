@@ -18,6 +18,8 @@
 
 package top.cmarco.lightlogin.listeners;
 
+import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -63,6 +65,32 @@ public final class LoginAuthenticatorListener extends NamedListener {
         this.configuration = this.plugin.getLightConfiguration();
     }
 
+    private void teleportLoginLoc(Player player) {
+        World targetWorld;
+        String loginWorldName = this.configuration.getLoginTeleportWorld();
+        for (World world : plugin.getServer().getWorlds()) {
+            if (world == null || !world.getName().equals(loginWorldName)) continue;
+            player.teleport(new Location(world, this.configuration.getLoginTeleportX(), this.configuration.getLoginTeleportY(), this.configuration.getLoginTeleportZ()));
+            break;
+        }
+    }
+
+    private void teleportPostLoginLoc(Player player, Location lastLoginLocation) {
+        World targetWorld;
+        String loginWorldName = this.configuration.getPostLoginTeleportWorld();
+
+        if (loginWorldName.equalsIgnoreCase("latest")) {
+            player.teleport(lastLoginLocation);
+            return;
+        }
+
+        for (World world : plugin.getServer().getWorlds()) {
+            if (world == null || !world.getName().equals(loginWorldName)) continue;
+            player.teleport(new Location(world, this.configuration.getPostLoginTeleportX(), this.configuration.getPostLoginTeleportY(), this.configuration.getPostLoginTeleportZ()));
+            break;
+        }
+    }
+
     @EventHandler(priority = EventPriority.HIGHEST)
     public void preJoin(final AsyncPlayerPreLoginEvent event) {
         final InetAddress inetAddress = event.getAddress();
@@ -97,6 +125,8 @@ public final class LoginAuthenticatorListener extends NamedListener {
             // return;
         }
 
+        final Location originalLocation = player.getLocation();
+
         autoKickManager.addEntered(player);
 
         plugin.getServer().getOnlinePlayers().stream()
@@ -117,7 +147,12 @@ public final class LoginAuthenticatorListener extends NamedListener {
                     if (row == null) {
                         whenOnline(player, p -> {
                             authManager.addUnregistered(p);
-                            runSync(plugin, () -> giveBlindness(p, plugin));
+                            runSync(plugin, () -> {
+                                giveBlindness(p, plugin);
+                                if (configuration.isLoginTeleportEnabled()) {
+                                    teleportLoginLoc(player);
+                                }
+                            });
                         });
                         return;
                     }
@@ -125,7 +160,12 @@ public final class LoginAuthenticatorListener extends NamedListener {
                     whenOnlineOrElse(player, p -> {
                         if (!player.hasPermission("lightlogin.autologin")) {
                             authManager.addUnloginned(player);
-                            runSync(plugin, () -> giveBlindness(player, plugin));
+                            runSync(plugin, () -> {
+                                giveBlindness(player, plugin);
+                                if (configuration.isLoginTeleportEnabled()) {
+                                    teleportLoginLoc(player);
+                                }
+                            });
                             return;
                         }
 
@@ -142,7 +182,12 @@ public final class LoginAuthenticatorListener extends NamedListener {
 
                             authManager.unauthenticate(player);
                             authManager.addUnloginned(player);
-                            runSync(plugin, () -> giveBlindness(player, plugin));
+                            runSync(plugin, () -> {
+                                giveBlindness(player, plugin);
+                                if (configuration.isLoginTeleportEnabled()) {
+                                    teleportLoginLoc(player);
+                                }
+                            });
                             return;
                         }
 
@@ -153,6 +198,10 @@ public final class LoginAuthenticatorListener extends NamedListener {
                             plugin.getServer().getScheduler().runTask(plugin, () -> {
                                 PlayerAuthenticateEvent playerAuthenticateEvent = new PlayerAuthenticateEvent(player, AuthenticationCause.AUTOMATIC);
                                 this.plugin.getServer().getPluginManager().callEvent(playerAuthenticateEvent);
+
+                                if (configuration.isLoginTeleportEnabled())
+                                    teleportPostLoginLoc(player, originalLocation);
+
                             });
 
                             this.authManager.authenticate(player);
@@ -160,7 +209,12 @@ public final class LoginAuthenticatorListener extends NamedListener {
 
                         } else {
                             authManager.addUnloginned(player);
-                            runSync(plugin, () -> giveBlindness(player, plugin));
+                            runSync(plugin, () -> {
+                                giveBlindness(player, plugin);
+                                if (configuration.isLoginTeleportEnabled()) {
+                                    teleportLoginLoc(player);
+                                }
+                            });
                         }
 
                     }, authManager::addUnloginned);

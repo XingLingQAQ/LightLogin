@@ -60,6 +60,19 @@ captcha:
   register-not-allowed:
     - "{PREFIX}: &c¡No se te permite registrarte sin completar el CAPTCHA!"
 
+# Teleport during Login and after Login to a custom location
+teleport:
+  enabled: false
+  login-teleport:
+    world: 'world'
+    x: 0.0
+    y: 70.0
+    z: 0.0
+  post-login-teleport:
+    world: 'world' # Write 'latest' to use latest location on server.
+    x: 0.0
+    y: 70.0
+    z: 0.0
 
 safety:
   players-same-ip: 2      # ¿Cuántos jugadores pueden estar conectados al mismo tiempo desde la misma dirección IPv4?

@@ -492,4 +492,39 @@ public final class LightConfiguration {
         return this.configuration.getStringList("captcha.punishments");
     }
 
+    public String getLoginTeleportWorld() {
+        return this.configuration.getString("teleport.login-teleport.world");
+    }
+
+    public double getLoginTeleportX() {
+        return this.configuration.getDouble("teleport.login-teleport.x");
+    }
+
+    public double getLoginTeleportY() {
+        return this.configuration.getDouble("teleport.login-teleport.y");
+    }
+
+    public double getLoginTeleportZ() {
+        return this.configuration.getDouble("teleport.login-teleport.z");
+    }
+
+    public String getPostLoginTeleportWorld() {
+        return this.configuration.getString("teleport.post-login-teleport.world");
+    }
+
+    public double getPostLoginTeleportX() {
+        return this.configuration.getDouble("teleport.post-login-teleport.x");
+    }
+
+    public double getPostLoginTeleportY() {
+        return this.configuration.getDouble("teleport.post-login-teleport.y");
+    }
+
+    public double getPostLoginTeleportZ() {
+        return this.configuration.getDouble("teleport.post-login-teleport.z");
+    }
+
+    public boolean isLoginTeleportEnabled() {
+        return this.configuration.getBoolean("teleport.enabled");
+    }
 }

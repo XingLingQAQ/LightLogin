@@ -61,6 +61,20 @@ captcha:
   register-not-allowed:
     - "{PREFIX}: &cHindi ka pinapayagang magrehistro nang hindi natatapos ang CAPTCHA!"
 
+# Teleport during Login and after Login to a custom location
+teleport:
+  enabled: false
+  login-teleport:
+    world: 'world'
+    x: 0.0
+    y: 70.0
+    z: 0.0
+  post-login-teleport:
+    world: 'world' # Write 'latest' to use latest location on server.
+    x: 0.0
+    y: 70.0
+    z: 0.0
+
 safety:
   players-same-ip: 2      # Ilang players ang maaring mag-connect sabay-sabay gamit ang parehong IPv4?
   register-same-ip: 2     # Ilang account ang maaaring magparehistro mula sa parehong IPv4?

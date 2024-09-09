@@ -29,6 +29,20 @@ void-world:
 login-blindness:       # 在登录或注册过程中启用盲目模式。
   enabled: true
 
+# 在登录时和登录后传送到自定义位置。
+teleport:
+  enabled: false
+  login-teleport:
+    world: 'world'
+    x: 0.0
+    y: 70.0
+    z: 0.0
+  post-login-teleport:
+    world: 'world' # 写入 “latest” 以使用最新位置。
+    x: 0.0
+    y: 70.0
+    z: 0.0
+
 safety:
   players-same-ip: 2      # 同一IPv4地址上可以同时连接多少玩家？
   register-same-ip: 2     # 同一IPv4地址可以注册多少个帐户？
