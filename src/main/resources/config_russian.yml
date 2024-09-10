@@ -61,7 +61,7 @@ captcha:
   register-not-allowed:
     - "{PREFIX}: &cВы не можете зарегистрироваться без прохождения CAPTCHA!"
 
-# Teleport during Login and after Login to a custom location
+# Телепорт при входе в систему и после входа в систему на пользовательское местоположение
 teleport:
   enabled: false
   login-teleport:
@@ -70,7 +70,7 @@ teleport:
     y: 70.0
     z: 0.0
   post-login-teleport:
-    world: 'world' # Write 'latest' to use latest location on server.
+    world: 'world' # Напишите 'latest', чтобы использовать последнее местоположение на сервере.
     x: 0.0
     y: 70.0
     z: 0.0

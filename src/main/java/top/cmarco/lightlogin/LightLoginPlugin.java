@@ -45,8 +45,6 @@ import java.util.Objects;
 
 public final class LightLoginPlugin extends JavaPlugin {
 
-    private static final int METRICS_ID = 21378;
-
     private AbstractFilter safetyFilter = null;
     private LightConfiguration lightConfiguration = null;
     private PluginDatabase database = null;

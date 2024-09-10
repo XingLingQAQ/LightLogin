@@ -60,7 +60,7 @@ captcha:
   register-not-allowed:
     - "{PREFIX}: &cאינך רשאי להירשם ללא ביצוע CAPTCHA!"
 
-# Teleport during Login and after Login to a custom location
+# טלפורט בזמן ההתחברות ולאחר ההתחברות למיקום מותאם אישית
 teleport:
   enabled: false
   login-teleport:
@@ -69,7 +69,7 @@ teleport:
     y: 70.0
     z: 0.0
   post-login-teleport:
-    world: 'world' # Write 'latest' to use latest location on server.
+    world: 'world' # כתוב 'latest' כדי להשתמש במיקום האחרון בשרת.
     x: 0.0
     y: 70.0
     z: 0.0

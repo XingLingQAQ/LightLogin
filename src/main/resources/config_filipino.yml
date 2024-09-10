@@ -61,7 +61,7 @@ captcha:
   register-not-allowed:
     - "{PREFIX}: &cHindi ka pinapayagang magrehistro nang hindi natatapos ang CAPTCHA!"
 
-# Teleport during Login and after Login to a custom location
+# Mag-teleport habang naglo-login at pagkatapos mag-login sa isang custom na lokasyon.
 teleport:
   enabled: false
   login-teleport:
@@ -70,7 +70,7 @@ teleport:
     y: 70.0
     z: 0.0
   post-login-teleport:
-    world: 'world' # Write 'latest' to use latest location on server.
+    world: 'world' # Isulat ang 'latest' para gamitin ang pinakabagong lokasyon sa server.
     x: 0.0
     y: 70.0
     z: 0.0

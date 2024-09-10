@@ -82,7 +82,7 @@ captcha:
   register-not-allowed:
     - "{PREFIX}: &cNon puoi registrarti senza aver completato il CAPTCHA!"
 
-# Teleport during Login and after Login to a custom location
+# Teletrasporto durante il login e dopo il login a una posizione personalizzata
 teleport:
   enabled: false
   login-teleport:
@@ -91,7 +91,7 @@ teleport:
     y: 70.0
     z: 0.0
   post-login-teleport:
-    world: 'world' # Write 'latest' to use latest location on server.
+    world: 'world' # Scrivi 'latest' per usare l'ultima posizione sul server.
     x: 0.0
     y: 70.0
     z: 0.0

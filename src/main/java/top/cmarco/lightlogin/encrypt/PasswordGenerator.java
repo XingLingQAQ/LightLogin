@@ -63,16 +63,12 @@ public final class PasswordGenerator {
 
     private static String getRandomCharacterSet(@NotNull final SecureRandom random) {
         int randomIndex = random.nextInt(3);
-        switch (randomIndex) {
-            case 0:
-                return LOWERCASE_CHARACTERS;
-            case 1:
-                return UPPERCASE_CHARACTERS;
-            case 2:
-                return DIGITS + SPECIAL_CHARACTERS;
-            default:
-                throw new IllegalStateException("Unexpected value: " + randomIndex);
-        }
+        return switch (randomIndex) {
+            case 0 -> LOWERCASE_CHARACTERS;
+            case 1 -> UPPERCASE_CHARACTERS;
+            case 2 -> DIGITS + SPECIAL_CHARACTERS;
+            default -> throw new IllegalStateException("Unexpected value: " + randomIndex);
+        };
     }
 
 }

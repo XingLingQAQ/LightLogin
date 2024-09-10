@@ -45,7 +45,6 @@ public final class WorldUtils {
         }
 
         worldCreator.environment(environment == null ? World.Environment.NORMAL : environment);
-        World loginWorld = worldCreator.createWorld();
-        return loginWorld;
+        return worldCreator.createWorld();
     }
 }
