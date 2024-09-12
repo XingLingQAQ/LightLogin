@@ -68,7 +68,7 @@ public final class LibraryManager {
         this.postgreSQL = Library.builder()
                 .groupId("org{}postgresql")
                 .artifactId("postgresql")
-                .version("42.7.2")
+                .version("42.7.4")
                 .relocate("org{}postgresql", "top{}cmarco{}lightlogin{}libs{}org{}postgresql")
                 .build();
 

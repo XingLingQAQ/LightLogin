@@ -32,7 +32,7 @@ public final class WorldUtils {
     }
 
     public static World findWorld(@NotNull LightConfiguration lightConfiguration) {
-        WorldCreator worldCreator = WorldCreator.name(StartupLogo.getLoadingString(7));
+        WorldCreator worldCreator = WorldCreator.name(StartupLogo.getLoadingString(7, lightConfiguration.getChosenLanguage()));
         worldCreator.generator(new EmptyChunkGenerator());
 
         World.Environment environment = null;

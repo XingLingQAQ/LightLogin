@@ -22,6 +22,7 @@ import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
+import top.cmarco.lightlogin.LightLoginPlugin;
 import top.cmarco.lightlogin.log.StartupLogo;
 
 import java.io.File;
@@ -37,7 +38,7 @@ public final class ConfigUtils {
     }
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
-    public static YamlConfiguration createCustomConfig(@NotNull ConfigurationFiles configurationFile, @NotNull Plugin plugin) {
+    public static YamlConfiguration createCustomConfig(@NotNull ConfigurationFiles configurationFile, @NotNull LightLoginPlugin plugin) {
         File customConfigFile = new File(plugin.getDataFolder(), configurationFile.getFilename());
 
         if (!customConfigFile.exists()) {
@@ -72,14 +73,14 @@ public final class ConfigUtils {
 
             return customConfig;
         } catch (IOException | InvalidConfigurationException exception) {
-            plugin.getLogger().warning(StartupLogo.getLoadingString(8) + configurationFile.getFilename());
+            plugin.getLogger().warning(StartupLogo.getLoadingString(8, plugin.getLightConfiguration().getChosenLanguage()) + configurationFile.getFilename());
             plugin.getLogger().warning(exception.getLocalizedMessage());
         }
         return null;
     }
 
-    public static ConfigurationFiles chosenLanguage(@NotNull Plugin plugin) {
-        final String language = plugin.getConfig().getString(StartupLogo.getLoadingString(18));
+    public static ConfigurationFiles chosenLanguage(@NotNull LightLoginPlugin plugin) {
+        final String language = plugin.getConfig().getString(StartupLogo.getLoadingString(18, ConfigurationFiles.ENGLISH));
         ConfigurationFiles chosenLanguage = null;
 
         for (ConfigurationFiles value : ConfigurationFiles.values()) {
@@ -90,8 +91,8 @@ public final class ConfigUtils {
         }
 
         if (chosenLanguage == null) {
-            plugin.getLogger().warning(StartupLogo.getLoadingString(19)+ language);
-            plugin.getLogger().warning(StartupLogo.getLoadingString(20));
+            plugin.getLogger().warning(StartupLogo.getLoadingString(19, plugin.getLightConfiguration().getChosenLanguage())+ language);
+            plugin.getLogger().warning(StartupLogo.getLoadingString(20, plugin.getLightConfiguration().getChosenLanguage()));
             chosenLanguage = ConfigurationFiles.ENGLISH;
         }
 

@@ -73,10 +73,10 @@ public final class LightLoginPlugin extends JavaPlugin {
     @Override
     public void onEnable() {
         this.printLogoStartup();
+        this.setupConfig();
         this.setupChatFilter();
         this.setupSecurity();
         this.loadLibraries();
-        this.setupConfig();
         this.setupDatabase();
         this.loadLoginWorld(); // 1
         this.setVoidLoginManager(); // 2
@@ -141,12 +141,12 @@ public final class LightLoginPlugin extends JavaPlugin {
 
     private void printLogoStartup() {
         this.sendConsoleColoured(StartupLogo.LOGO_ARRAY[0]);
-        this.sendConsoleColoured(StartupLogo.getLoadingString(0));
+        this.sendConsoleColoured(StartupLogo.getLoadingString(0, ConfigurationFiles.ENGLISH));
     }
 
     private void setupSecurity() {
-        this.sendConsoleColoured(StartupLogo.getLoadingString(1));
-        this.sendConsoleColoured(StartupLogo.getLoadingString(2));
+        this.sendConsoleColoured(StartupLogo.getLoadingString(1, lightConfiguration.getChosenLanguage()));
+        this.sendConsoleColoured(StartupLogo.getLoadingString(2, lightConfiguration.getChosenLanguage()));
     }
 
     public void setVoidLoginManager() {
@@ -154,21 +154,21 @@ public final class LightLoginPlugin extends JavaPlugin {
             return;
         }
 
-        this.sendConsoleColoured(StartupLogo.getLoadingString(3));
+        this.sendConsoleColoured(StartupLogo.getLoadingString(3, lightConfiguration.getChosenLanguage()));
         this.voidLoginManager = new VoidLoginManager(this.loginWorld);
-        this.sendConsoleColoured(StartupLogo.getLoadingString(4));
+        this.sendConsoleColoured(StartupLogo.getLoadingString(4, lightConfiguration.getChosenLanguage()));
     }
 
     public void setupVerificationManager() {
-        this.sendConsoleColoured(StartupLogo.getLoadingString(27));
+        this.sendConsoleColoured(StartupLogo.getLoadingString(27, lightConfiguration.getChosenLanguage()));
         this.verificationManager = new VerificationManager(this);
-        this.sendConsoleColoured(StartupLogo.getLoadingString(28));
+        this.sendConsoleColoured(StartupLogo.getLoadingString(28, lightConfiguration.getChosenLanguage()));
     }
 
     private void setAuthLogs() {
-        this.sendConsoleColoured(StartupLogo.getLoadingString(5));
+        this.sendConsoleColoured(StartupLogo.getLoadingString(5, lightConfiguration.getChosenLanguage()));
         this.authLogs = new AuthLogs(this);
-        this.sendConsoleColoured(StartupLogo.getLoadingString(6));
+        this.sendConsoleColoured(StartupLogo.getLoadingString(6, lightConfiguration.getChosenLanguage()));
     }
 
     public void loadLoginWorld() {
@@ -190,12 +190,12 @@ public final class LightLoginPlugin extends JavaPlugin {
      * Setup chat filter to prevent password leaks
      */
     private void setupChatFilter() {
-        this.sendConsoleColoured(StartupLogo.getLoadingString(9));
+        this.sendConsoleColoured(StartupLogo.getLoadingString(9, lightConfiguration.getChosenLanguage()));
         Logger rootLogger = (Logger) LogManager.getRootLogger();
         this.safetyFilter = new SafetyFilter();
         this.safetyFilter.start();
         rootLogger.addFilter(this.safetyFilter);
-        this.sendConsoleColoured(StartupLogo.getLoadingString(10));
+        this.sendConsoleColoured(StartupLogo.getLoadingString(10, lightConfiguration.getChosenLanguage()));
     }
 
     /**
@@ -216,11 +216,11 @@ public final class LightLoginPlugin extends JavaPlugin {
             return;
         }
 
-        this.sendConsoleColoured(StartupLogo.getLoadingString(11));
+        this.sendConsoleColoured(StartupLogo.getLoadingString(11, lightConfiguration.getChosenLanguage()));
         this.authenticationManager = new BasicAuthenticationManager(this);
         this.authenticationManager.startLoginNotifyTask();
         this.authenticationManager.startRegisterNotifyTask();
-        this.sendConsoleColoured(StartupLogo.getLoadingString(12));
+        this.sendConsoleColoured(StartupLogo.getLoadingString(12, lightConfiguration.getChosenLanguage()));
     }
 
     private void setupKickManager() {
@@ -228,43 +228,43 @@ public final class LightLoginPlugin extends JavaPlugin {
             return;
         }
 
-        this.sendConsoleColoured(StartupLogo.getLoadingString(13));
+        this.sendConsoleColoured(StartupLogo.getLoadingString(13, lightConfiguration.getChosenLanguage()));
         this.autoKickManager = new AutoKickManager(this);
         this.autoKickManager.startAutoKickTask();
-        this.sendConsoleColoured(StartupLogo.getLoadingString(14));
+        this.sendConsoleColoured(StartupLogo.getLoadingString(14, lightConfiguration.getChosenLanguage()));
     }
 
     /**
      * Method responsible for registering all of this software listeners.
      */
     private void registerAllListeners() {
-        this.sendConsoleColoured(StartupLogo.getLoadingString(15));
+        this.sendConsoleColoured(StartupLogo.getLoadingString(15, lightConfiguration.getChosenLanguage()));
         this.listenerManager = new ListenerManager(this);
         this.listenerManager.addAllListeners();
         this.listenerManager.registerAllAddedListeners();
-        this.sendConsoleColoured(StartupLogo.getLoadingString(16));
+        this.sendConsoleColoured(StartupLogo.getLoadingString(16, lightConfiguration.getChosenLanguage()));
     }
 
     private void setupConfig() {
-        this.sendConsoleColoured(StartupLogo.getLoadingString(17));
         saveDefaultConfig();
         saveAllConfigs();
         ConfigurationFiles chosenLanguage = ConfigUtils.chosenLanguage(this);
-        this.sendConsoleColoured(StartupLogo.getLoadingString(21) + chosenLanguage.name() + "!");
         lightConfiguration = new LightConfiguration(chosenLanguage, this);
         lightConfiguration.loadConfig();
+        this.sendConsoleColoured(StartupLogo.getLoadingString(17, lightConfiguration.getChosenLanguage()));
+        this.sendConsoleColoured(StartupLogo.getLoadingString(21, lightConfiguration.getChosenLanguage()) + ' ' + chosenLanguage.name() + "!");
     }
 
     private void setupDatabase() {
-        this.sendConsoleColoured(StartupLogo.getLoadingString(22));
+        this.sendConsoleColoured(StartupLogo.getLoadingString(22, lightConfiguration.getChosenLanguage()));
         final DatabaseType databaseType = DatabaseType.fromName(
                 Objects.requireNonNull(this.lightConfiguration.getDatabaseType()));
 
         if (databaseType == null) {
             this.disabled = true;
-            getLogger().warning(StartupLogo.getLoadingString(23));
+            getLogger().warning(StartupLogo.getLoadingString(23, lightConfiguration.getChosenLanguage()));
             if (lightConfiguration.isCrashShutdown()) {
-                getLogger().warning(StartupLogo.getLoadingString(24));
+                getLogger().warning(StartupLogo.getLoadingString(24, lightConfiguration.getChosenLanguage()));
                 getServer().shutdown();
             }
             return;
@@ -283,7 +283,7 @@ public final class LightLoginPlugin extends JavaPlugin {
         this.database.connect();
         this.database.createTables();
 
-        this.sendConsoleColoured(StartupLogo.getLoadingString(25) + databaseType.name() + StartupLogo.getLoadingString(26));
+        this.sendConsoleColoured(StartupLogo.getLoadingString(25, lightConfiguration.getChosenLanguage()) + databaseType.name() + StartupLogo.getLoadingString(26, lightConfiguration.getChosenLanguage()));
     }
 
     /* -------------------------------------------------------------------------- */

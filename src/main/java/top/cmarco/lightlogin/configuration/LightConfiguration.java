@@ -61,6 +61,10 @@ public final class LightConfiguration {
         configuration = this.plugin.getLanguagesConfigMap().get(chosenLanguage);
     }
 
+    public ConfigurationFiles getChosenLanguage() {
+        return chosenLanguage;
+    }
+
     public List<String> getPluginInfo() {
         return this.configuration.getStringList("plugin.info");
     }
